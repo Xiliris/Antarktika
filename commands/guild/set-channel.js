@@ -32,7 +32,7 @@ module.exports = {
           `✅ | Economy channel was successfully set to <#${channelId}>`
         );
       message.channel.send(embed);
-      return;
+      return;https://github.com/Xiliris/AntarktikaBOT/blob/main/commands/guild/set-channel.js
     } else if (args === "commands") {
       await channelSchema.findOneAndUpdate(
         {
@@ -66,7 +66,6 @@ module.exports = {
           upsert: true,
         }
       );
-      levelingCache[guildId] = channel;
       const embed = new Discord.MessageEmbed()
         .setAuthor(member.user.tag, member.user.displayAvatarURL(String))
         .setDescription(
