@@ -4,26 +4,71 @@ const timerSchema = require("../../schemas/timer-schema");
 const winnersSchema = require("../../schemas/winners-schema");
 module.exports = {
   commands: ["roulette"],
+  expectedArgs: "<Bet> <Ball>",
+  minArgs: 2,
   requiredChannel: "economy",
   callback: async (message, arguments, Discord, text, client) => {
     const { guild, channel } = message;
     let user = message.author;
     let guildId = guild.id;
     let userId = message.author.id;
-    let bet = arguments[0];
     let card = arguments[1];
-    if (isNaN(bet)) {
+    const result = await profileSchema.findOne({
+      guildId,
+      userId,
+    });
+    if (!result) {
       const embed = new Discord.MessageEmbed()
-        .setAuthor(user.tag, user.displayAvatarURL(String))
-        .setDescription("❌ | You're bet isn't valid number!");
+        .setAuthor(message.author.tag, message.author.displayAvatarURL(String))
+        .setDescription("❌ | You don't have enough money!");
       message.channel.send(embed);
       return;
-    } else if (bet < 100) {
-      const embed = new Discord.MessageEmbed()
-        .setAuthor(user.tag, user.displayAvatarURL(String))
-        .setDescription("❌ | Minimum bet is $100");
-      message.channel.send(embed);
-      return;
+    }
+    let bet;
+    if (arguments[0] === "all") {
+      if (result.cash < 100) {
+        const embed = new Discord.MessageEmbed()
+          .setAuthor(
+            message.author.tag,
+            message.author.displayAvatarURL(String)
+          )
+          .setDescription("❌ | Minimum bet is **$100**");
+        message.channel.send(embed);
+        return;
+      }
+      bet = result.cash;
+    } else {
+      if (isNaN(arguments[0])) {
+        const embed = new Discord.MessageEmbed()
+          .setAuthor(
+            message.author.tag,
+            message.author.displayAvatarURL(String)
+          )
+          .setDescription("❌ | Invalid bet!");
+        message.channel.send(embed);
+        return;
+      }
+      if (arguments[0] < 100) {
+        const embed = new Discord.MessageEmbed()
+          .setAuthor(
+            message.author.tag,
+            message.author.displayAvatarURL(String)
+          )
+          .setDescription("❌ | Minimum bet is **$100**");
+        message.channel.send(embed);
+        return;
+      }
+      if (result.cash < arguments[0]) {
+        const embed = new Discord.MessageEmbed()
+          .setAuthor(
+            message.author.tag,
+            message.author.displayAvatarURL(String)
+          )
+          .setDescription("❌ | You don't have enough money!");
+        message.channel.send(embed);
+        return;
+      }
+      bet = arguments[0];
     }
     if (card !== "black" && card !== "red" && card !== "green") {
       if (isNaN(card)) {
@@ -45,14 +90,6 @@ module.exports = {
         message.channel.send(embed);
         return;
       }
-    }
-    let result = await profileSchema.findOne({ guildId, userId });
-    if (result.cash < bet) {
-      const embed = new Discord.MessageEmbed()
-        .setAuthor(user.tag, user.displayAvatarURL(String))
-        .setDescription("❌ | You don't have enough money in cash!");
-      message.channel.send(embed);
-      return;
     }
     await profileSchema.findOneAndUpdate(
       {
