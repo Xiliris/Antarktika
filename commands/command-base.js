@@ -99,6 +99,7 @@ module.exports = (client, commandOptions) => {
         const result = await channelSchema.findOne({
           _id: guild.id,
         });
+        if(result) {
         if (requiredChannel !== "") {
           if (requiredChannel === "economy") {
             if (!result.economy) {
@@ -142,7 +143,7 @@ module.exports = (client, commandOptions) => {
             }
           }
         }
-
+}
         // Ensure the user has the required permissions
         for (const permission of permissions) {
           if (!member.hasPermission(permission)) {
