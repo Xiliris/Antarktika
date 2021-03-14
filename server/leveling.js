@@ -1,6 +1,5 @@
 const profileSchema = require("../schemas/profile-schema");
 const usedCommand = new Set();
-const levelingCache = require("../cache/leveling-cache");
 const channelSchema = require("../schemas/channel-schema");
 module.exports = (client, Discord) => {
   client.on("message", async (message) => {
@@ -80,24 +79,23 @@ module.exports = (client, Discord) => {
         }
       );
 
-      let data = levelingCache[guild.id];
-
-      if (data) {
-        const result = await channelSchema.findOne({
-          guildId,
-          userId,
-        });
-
-        const channel =
-          client.channels.cache.get(result.leveling) || message.channel;
-
+      const result = await channelSchema.findOne({
+        _id: guildId,
+      });
+      if (result.leveling) {
+        const channel = guild.channels.cache.find(
+          (channel) => channel.name === result.leveling
+        );
         const newEmbed = new Discord.MessageEmbed()
           .setAuthor(
             `${memberTarget.user.tag}`,
             memberTarget.user.displayAvatarURL(String)
           )
           .setThumbnail(memberTarget.user.displayAvatarURL(String))
-          .setDescription(`\n‏‏‎ ‎YOU ARE NOW LEVEL **${level + 1}**`)
+          .addFields({
+            name: "Congratulations",
+            value: `\n‏‏‎‎YOU ARE NOW LEVEL **${level + 1}**`,
+          })
           .setColor("#7300ff")
           .setTimestamp();
 
@@ -106,19 +104,25 @@ module.exports = (client, Discord) => {
         setTimeout(() => {
           usedCommand.delete(message.author.id);
         }, 1000 * 3);
-        return;
       } else {
         const newEmbed = new Discord.MessageEmbed()
           .setAuthor(
             `${memberTarget.user.tag}`,
             memberTarget.user.displayAvatarURL(String)
           )
-          .setDescription(`\n‏‏‎ ‎YOU ARE NOW LEVEL **${level + 1}**`)
+          .setThumbnail(memberTarget.user.displayAvatarURL(String))
+          .addFields({
+            name: "Congratulations",
+            value: `\n‏‏‎‎YOU ARE NOW LEVEL **${level + 1}**`,
+          })
           .setColor("#7300ff")
-          .setFooter("Bot Developer Xiliris");
+          .setTimestamp();
 
         message.channel.send(newEmbed);
-        return;
+        usedCommand.add(message.author.id);
+        setTimeout(() => {
+          usedCommand.delete(message.author.id);
+        }, 1000 * 3);
       }
     } else return;
   });
