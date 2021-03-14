@@ -101,7 +101,8 @@ module.exports = (client, commandOptions) => {
         });
         if (requiredChannel !== "") {
           if (requiredChannel === "economy") {
-            if (!result.economy) return;
+            if (!result.economy) {
+            }
             let gotChannel = message.guild.channels.cache.find(
               (channel) => channel.name === result.economy
             );
@@ -120,7 +121,8 @@ module.exports = (client, commandOptions) => {
               }
             }
           } else if (requiredChannel === "commands") {
-            if (!result.commads) return;
+            if (!result.commads) {
+            }
             let gotChannel = message.guild.channels.cache.find(
               (channel) => channel.name === result.commands
             );
