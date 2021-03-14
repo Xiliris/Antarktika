@@ -32,7 +32,7 @@ module.exports = {
           `✅ | Economy channel was successfully set to <#${channelId}>`
         );
       message.channel.send(embed);
-      return;https://github.com/Xiliris/AntarktikaBOT/blob/main/commands/guild/set-channel.js
+      return;
     } else if (args === "commands") {
       await channelSchema.findOneAndUpdate(
         {
