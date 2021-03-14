@@ -101,6 +101,7 @@ module.exports = (client, commandOptions) => {
         });
         if (requiredChannel !== "") {
           if (requiredChannel === "economy") {
+            if (!result.economy) return;
             let gotChannel = message.guild.channels.cache.find(
               (channel) => channel.name === result.economy
             );
@@ -119,6 +120,7 @@ module.exports = (client, commandOptions) => {
               }
             }
           } else if (requiredChannel === "commands") {
+            if (!result.commads) return;
             let gotChannel = message.guild.channels.cache.find(
               (channel) => channel.name === result.commands
             );
@@ -136,20 +138,6 @@ module.exports = (client, commandOptions) => {
                 return;
               }
             }
-          }
-        }
-        if (requiredChannel !== "") {
-          if (requiredChannel !== channel.name) {
-            const foundChannel = guild.channels.cache.find((channel) => {
-              return channel.name === requiredChannel;
-            });
-            const embed = new Discord.MessageEmbed()
-              .setAuthor(member.user.tag, member.user.displayAvatarURL(String))
-              .setDescription(
-                `✉️ | You can only use this command in <#${foundChannel.id}>`
-              );
-            message.channel.send(embed);
-            return;
           }
         }
 
