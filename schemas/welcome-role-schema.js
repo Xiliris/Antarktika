@@ -5,16 +5,12 @@ const reqString = {
   required: true,
 };
 
-const reactionSchema = mongoose.Schema({
+const welcomeRoleSchema = mongoose.Schema({
   guildId: reqString,
-  channelId: reqString,
-  messageId: reqString,
   roles: [
     {
-      emoji: reqString,
       role: reqString,
     },
   ],
 });
-
-module.exports = mongoose.model("guild-reaction", reactionSchema);
+module.exports = mongoose.model("guild-welcome-role", welcomeRoleSchema);
