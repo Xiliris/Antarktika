@@ -11,6 +11,7 @@ module.exports = (client, Discord) => {
       userId,
     });
     if (message.member.hasPermission("ADMINISTRATOR")) return;
+    if (!result) return;
     if (result.message === lastMessage) {
       message.delete();
       const embed = new Discord.MessageEmbed()

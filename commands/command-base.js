@@ -99,68 +99,49 @@ module.exports = (client, commandOptions) => {
         const result = await channelSchema.findOne({
           _id: guild.id,
         });
-        if (requiredChannel !== "") {
-          if (requiredChannel === "economy") {
-            let gotChannel = message.guild.channels.cache.find(
-              (channel) => channel.name === result.economy
-            );
-            if (result.economy) {
-              if (channel !== gotChannel) {
-                const embed = new Discord.MessageEmbed()
-                  .setAuthor(
-                    member.user.tag,
-                    member.user.displayAvatarURL(String)
-                  )
-                  .setDescription(
-                    `✉️ | You can only use this command in <#${gotChannel.id}>`
-                  );
-                message.channel.send(embed);
-                return;
+        if (result) {
+          if (requiredChannel !== "") {
+            if (requiredChannel === "economy") {
+              if (!result.economy) {
               }
-            }
-          } else if (requiredChannel === "commands") {
-            let gotChannel = message.guild.channels.cache.find(
-              (channel) => channel.name === result.commands
-            );
-            if (result.commands) {
-              if (channel !== gotChannel) {
-                const embed = new Discord.MessageEmbed()
-                  .setAuthor(
-                    member.user.tag,
-                    member.user.displayAvatarURL(String)
-                  )
-                  .setDescription(
-                    `✉️ | You can only use this command in <#${gotChannel.id}>`
-                  );
-                message.channel.send(embed);
-                return;
-              }
-            }
-          }
-        }
-        if (requiredChannel !== "") {
-          if (requiredChannel !== channel.name) {
-            const foundChannel = guild.channels.cache.find((channel) => {
-              return channel.name === requiredChannel;
-            });
-            const embed = new Discord.MessageEmbed()
-              .setAuthor(member.user.tag, member.user.displayAvatarURL(String))
-              .setDescription(
-                `✉️ | You can only use this command in <#${foundChannel.id}>`
+              let gotChannel = message.guild.channels.cache.find(
+                (channel) => channel.name === result.economy
               );
-            message.channel.send(embed);
-            return;
-          }
-        }
-
-        // Ensure the user has the required permissions
-        for (const permission of permissions) {
-          if (!member.hasPermission(permission)) {
-            const embed = new Discord.MessageEmbed()
-              .setAuthor(member.user.tag, member.user.displayAvatarURL(String))
-              .setDescription(`⛔ | **You don't have permission for that!**`);
-            message.channel.send(embed);
-            return;
+              if (result.economy) {
+                if (channel !== gotChannel) {
+                  const embed = new Discord.MessageEmbed()
+                    .setAuthor(
+                      member.user.tag,
+                      member.user.displayAvatarURL(String)
+                    )
+                    .setDescription(
+                      `✉️ | You can only use this command in <#${gotChannel.id}>`
+                    );
+                  message.channel.send(embed);
+                  return;
+                }
+              }
+            } else if (requiredChannel === "commands") {
+              if (!result.commads) {
+              }
+              let gotChannel = message.guild.channels.cache.find(
+                (channel) => channel.name === result.commands
+              );
+              if (result.commands) {
+                if (channel !== gotChannel) {
+                  const embed = new Discord.MessageEmbed()
+                    .setAuthor(
+                      member.user.tag,
+                      member.user.displayAvatarURL(String)
+                    )
+                    .setDescription(
+                      `✉️ | You can only use this command in <#${gotChannel.id}>`
+                    );
+                  message.channel.send(embed);
+                  return;
+                }
+              }
+            }
           }
         }
 

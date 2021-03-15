@@ -66,7 +66,6 @@ module.exports = {
           upsert: true,
         }
       );
-      levelingCache[guildId] = channel;
       const embed = new Discord.MessageEmbed()
         .setAuthor(member.user.tag, member.user.displayAvatarURL(String))
         .setDescription(

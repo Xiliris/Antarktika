@@ -32,7 +32,8 @@ module.exports = {
         .setDescription("‏‏‎ ‎")
         .addFields(
           { name: "Rank", value: "Show your's or someone's rank card." },
-          { name: "Top-xp", value: "Shows xp leaderboard." }
+          { name: "Top-xp", value: "Shows xp leaderboard." },
+          { name: "Rewards", value: "Check rewards for levels." }
         )
         .setThumbnail(guild.iconURL());
       message.channel.send(leveling);
@@ -123,7 +124,12 @@ module.exports = {
           {
             name: "Reaction-Role",
             value: "Set a reaction role for reaction message.",
-          }
+          },
+          { name: "Add-Rewards", value: "Adds reward for leveling" },
+          { name: "Remove-Rewards", value: "Removes reward for leveling" },
+          { name: "Add-Welcome-Role", value: "Adds welcome role." },
+          { name: "Remove-Welcome-Role", value: "Removes welcome role." },
+          { name: "List-Welcome-Roles", value: "Lists all welcome roles." }
         )
         .setThumbnail(guild.iconURL());
       message.channel.send(settings);

@@ -8,7 +8,9 @@ module.exports = {
     let top = "";
 
     const results = await profileSchema
-      .find({})
+      .find({
+        guildId: guild.id,
+      })
       .sort({
         level: -1,
       })
