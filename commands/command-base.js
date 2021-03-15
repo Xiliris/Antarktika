@@ -99,7 +99,6 @@ module.exports = (client, commandOptions) => {
         const result = await channelSchema.findOne({
           _id: guild.id,
         });
-<<<<<<< HEAD
         if (result) {
           if (requiredChannel !== "") {
             if (requiredChannel === "economy") {
@@ -143,52 +142,9 @@ module.exports = (client, commandOptions) => {
                 }
               }
             }
-=======
-        if(result) {
-        if (requiredChannel !== "") {
-          if (requiredChannel === "economy") {
-            if (!result.economy) {
-            }
-            let gotChannel = message.guild.channels.cache.find(
-              (channel) => channel.name === result.economy
-            );
-            if (result.economy) {
-              if (channel !== gotChannel) {
-                const embed = new Discord.MessageEmbed()
-                  .setAuthor(
-                    member.user.tag,
-                    member.user.displayAvatarURL(String)
-                  )
-                  .setDescription(
-                    `✉️ | You can only use this command in <#${gotChannel.id}>`
-                  );
-                message.channel.send(embed);
-                return;
-              }
-            }
-          } else if (requiredChannel === "commands") {
-            if (!result.commads) {
-            }
-            let gotChannel = message.guild.channels.cache.find(
-              (channel) => channel.name === result.commands
-            );
-            if (result.commands) {
-              if (channel !== gotChannel) {
-                const embed = new Discord.MessageEmbed()
-                  .setAuthor(
-                    member.user.tag,
-                    member.user.displayAvatarURL(String)
-                  )
-                  .setDescription(
-                    `✉️ | You can only use this command in <#${gotChannel.id}>`
-                  );
-                message.channel.send(embed);
-                return;
-              }
-            }
           }
         }
-}
+
         // Ensure the user has the required permissions
         for (const permission of permissions) {
           if (!member.hasPermission(permission)) {
@@ -197,7 +153,6 @@ module.exports = (client, commandOptions) => {
               .setDescription(`⛔ | **You don't have permission for that!**`);
             message.channel.send(embed);
             return;
->>>>>>> b0cd518f4d306593cbce2cdd70f13a16cfc34e98
           }
         }
 
