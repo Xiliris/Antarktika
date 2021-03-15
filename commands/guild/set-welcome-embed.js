@@ -186,9 +186,76 @@ module.exports = {
                                                                   upsert: true,
                                                                 }
                                                               );
-                                                              message.channel.send(
-                                                                "**All Done**"
-                                                              );
+                                                              message.channel
+                                                                .send(
+                                                                  "**Please enter image URL**"
+                                                                )
+                                                                .then(
+                                                                  async () => {
+                                                                    message.channel
+                                                                      .awaitMessages(
+                                                                        filter,
+                                                                        {
+                                                                          max: 1,
+                                                                          time:
+                                                                            1000 *
+                                                                            60,
+                                                                          errors: [
+                                                                            "time",
+                                                                          ],
+                                                                        }
+                                                                      )
+                                                                      .then(
+                                                                        async (
+                                                                          collected
+                                                                        ) => {
+                                                                          await welcomeSchema.findOneAndUpdate(
+                                                                            {
+                                                                              guildId:
+                                                                                message
+                                                                                  .guild
+                                                                                  .id,
+                                                                            },
+                                                                            {
+                                                                              guildId:
+                                                                                message
+                                                                                  .guild
+                                                                                  .id,
+                                                                              imageEmbed: collected.first()
+                                                                                .content,
+                                                                            },
+                                                                            {
+                                                                              upsert: true,
+                                                                            }
+                                                                          );
+                                                                          message.channel
+                                                                            .send(
+                                                                              "**All Done**"
+                                                                            )
+                                                                            .then(
+                                                                              (
+                                                                                message
+                                                                              ) => {
+                                                                                message.delete(
+                                                                                  {
+                                                                                    timeout: 3000,
+                                                                                  }
+                                                                                );
+                                                                              }
+                                                                            );
+                                                                        }
+                                                                      )
+                                                                      .catch(
+                                                                        (
+                                                                          collected
+                                                                        ) => {
+                                                                          message.channel.send(
+                                                                            "Time is out...."
+                                                                          );
+                                                                        }
+                                                                      );
+                                                                  }
+                                                                );
                                                             }
                                                           )
                                                           .catch(
