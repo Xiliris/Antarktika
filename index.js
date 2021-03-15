@@ -27,6 +27,7 @@ const counterRole = require("./server/counter-role");
 const welcomeImage = require("./server/welcome-image");
 const welcomeText = require("./server/welcome-text");
 const welcomeEmbed = require("./server/welcome-embed");
+const welcomeRole = require("./server/welcome-role");
 const leaveMessage = require("./server/goodbye-message");
 const reactionRole = require("./server/reaction-role");
 
@@ -75,6 +76,7 @@ client.on("ready", async () => {
   welcomeImage(client, Canvas, Discord);
   welcomeText(client, Discord);
   welcomeEmbed(client, Discord);
+  welcomeRole(client);
   leaveMessage(client);
   reactionRole(client);
 

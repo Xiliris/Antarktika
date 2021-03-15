@@ -31,7 +31,7 @@ module.exports = (client, Discord) => {
       const result = await loggingSchema.findOne({
         guildId: oldMember.guild.id,
       });
-
+      if (!result) return;
       if (result.user) {
         let logChannel = oldMember.guild.channels.cache.get(result.user);
         logChannel.send(Embed);
