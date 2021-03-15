@@ -50,6 +50,20 @@ module.exports = (client, Discord) => {
 
     const { executor, target } = deletionLog;
     if (!message.cleanContent) return;
+    await snipeSchema.findOneAndUpdate(
+      {
+        _id: message.guild.id,
+      },
+      {
+        _id: message.guild.id,
+        author: executor.tag,
+        authorImage: executor.displayAvatarURL(String),
+        text: message.cleanContent,
+      },
+      {
+        upsert: true,
+      }
+    );
     if (message.cleanContent.includes("discord.gg/")) return;
     if (blacklist.some((word) => message.cleanContent.includes(word))) return;
     const logEmbed = new Discord.MessageEmbed()
@@ -67,19 +81,5 @@ module.exports = (client, Discord) => {
       let logChannel = message.guild.channels.cache.get(result.message);
       logChannel.send(logEmbed);
     }
-    await snipeSchema.findOneAndUpdate(
-      {
-        _id: message.guild.id,
-      },
-      {
-        _id: message.guild.id,
-        author: executor.tag,
-        authorImage: executor.displayAvatarURL(String),
-        text: message.cleanContent,
-      },
-      {
-        upsert: true,
-      }
-    );
   });
 };
