@@ -55,7 +55,7 @@ module.exports = {
           { name: "Afk", value: "Toggle afk mode." },
           { name: "Dice", value: "Roll a dice." },
           { name: "Invite", value: "Get bots invite link." },
-          { name: "Last-Message", value: "Get users last message." },
+          { name: "Last-Message", value: "Get users last deleted message." },
           { name: "Snipe", value: "Get last deleted message." }
         )
         .setThumbnail(guild.iconURL());
