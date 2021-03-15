@@ -16,6 +16,7 @@ const welcomeSchema = mongoose.Schema({
   thirdField: reqString,
   thirdText: reqString,
   descriptionEmbed: reqString,
+  imageEmbed: reqString,
 });
 
 module.exports = mongoose.model("guild-welcome", welcomeSchema);
