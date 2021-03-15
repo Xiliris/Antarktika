@@ -20,10 +20,12 @@ module.exports = (client, Discord) => {
       thirdField,
       thirdText,
       descriptionEmbed,
+      imageEmbed,
     } = results;
     const embed = new Discord.MessageEmbed()
       .setAuthor(member.user.tag, member.user.displayAvatarURL(String))
       .setThumbnail(member.user.displayAvatarURL(String))
+      .setImage(imageEmbed)
       .setTimestamp()
       .addFields(
         { name: firstField, value: firstText },
