@@ -1,13 +1,5 @@
-<<<<<<< HEAD
 {
   "token": "ODIxMDYzMzY4OTk5NTY3MzYy.YE-Q2Q.VLnFHhPkn52eVrO_3wYhqnYxYk8",
   "prefix": "!",
   "mongoPath": "mongodb+srv://BOT:Ng0iYSWuTN0QLYMF@cluster0.7bzas.mongodb.net/DiscordBOT"
 }
-=======
-{
-  "token": "ODIxMDYzMzY4OTk5NTY3MzYy.YE-Q2Q.VLnFHhPkn52eVrO_3wYhqnYxYk8",
-  "prefix": "!",
-  "mongoPath": "mongodb+srv://BOT:Ng0iYSWuTN0QLYMF@cluster0.7bzas.mongodb.net/DiscordBOT"
-}
->>>>>>> 8a3754cccb498051759a59e25235a1c862f0b9a4
