@@ -94,7 +94,6 @@ module.exports = (client, Discord) => {
       const result = await channelSchema.findOne({
         _id: guildId,
       });
-<<<<<<< HEAD
       if (!result) {
         const newEmbed = new Discord.MessageEmbed()
           .setAuthor(
@@ -116,13 +115,12 @@ module.exports = (client, Discord) => {
         }, 1000 * 3);
         return;
       }
-=======
->>>>>>> b0cd518f4d306593cbce2cdd70f13a16cfc34e98
+
       if (result.leveling) {
         const channel = guild.channels.cache.find(
           (channel) => channel.name === result.leveling
         );
-<<<<<<< HEAD
+
         if (!channel) {
           const newEmbed = new Discord.MessageEmbed()
             .setAuthor(
@@ -143,8 +141,7 @@ module.exports = (client, Discord) => {
             usedCommand.delete(message.author.id);
           }, 1000 * 3);
         }
-=======
->>>>>>> b0cd518f4d306593cbce2cdd70f13a16cfc34e98
+
         const newEmbed = new Discord.MessageEmbed()
           .setAuthor(
             `${memberTarget.user.tag}`,
