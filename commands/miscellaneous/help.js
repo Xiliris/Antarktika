@@ -85,7 +85,7 @@ module.exports = {
           { name: "Nuke", value: "Delete everything for the chat." },
           { name: "Lock", value: "Lock the chat." },
           { name: "Unlock", value: "Unlock the chat." },
-          { name: "Mute", value: "Mute someone so they cant type." },
+          { name: "Mute", value: "Mute someone so they can't type." },
           { name: "Unmute", value: "Unmute someone." },
           { name: "Warn", value: "Warn someone." },
           { name: "Infractions", value: "Check warnings for someone." },
