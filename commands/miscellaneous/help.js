@@ -101,7 +101,7 @@ module.exports = {
         .setTitle(`${guild.name}`)
         .setDescription("‏‏‎ ‎")
         .addFields(
-          { name: "Set-Prefix", value: "Set bot's prefix." },
+          { name: "Set-Prefix", value: "Set bot prefix." },
           { name: "Set-Channel", value: "Set channel for something." },
           { name: "Set-Logging", value: "Set channel for loggs." },
           { name: "Clear-Logging", value: "Stop logs" },
