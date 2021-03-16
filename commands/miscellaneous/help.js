@@ -8,7 +8,7 @@ module.exports = {
         .setTitle(`${guild.name}`)
         .setDescription("‏‏‎ ‎")
         .addFields(
-          { name: "Balance", value: "Check your's or someone's balance." },
+          { name: "Balance", value: "Check yours or someones balance." },
           { name: "Deposit", value: "Deposit your money to the bank." },
           { name: "Withdraw", value: "Withdraw your money from the bank." },
           { name: "Work", value: "Earn some money." },
@@ -30,7 +30,7 @@ module.exports = {
         .setTitle(`${guild.name}`)
         .setDescription("‏‏‎ ‎")
         .addFields(
-          { name: "Rank", value: "Show your's or someone's rank card." },
+          { name: "Rank", value: "Show yours or someones rank card." },
           { name: "Top-xp", value: "Shows xp leaderboard." },
           { name: "Rewards", value: "Check rewards for levels." }
         )
@@ -41,7 +41,7 @@ module.exports = {
         .setTitle(`${guild.name}`)
         .setDescription("‏‏‎ ‎")
         .addFields(
-          { name: "Avatar", value: "Shows your's or someone's avatar." },
+          { name: "Avatar", value: "Shows yours or someones avatar." },
           { name: "Marry", value: "Marry someone you love." },
           { name: "Divorce", value: "Divorce if you don't love them anymore." },
           {
@@ -69,7 +69,7 @@ module.exports = {
           { name: "Hate", value: "Check how much you hate someone." },
           { name: "Ship", value: "Check how much you love someone." },
           { name: "Tweet", value: "Tweet something on discord." },
-          { name: "Meme", value: "Sends a random meme from redit." }
+          { name: "Meme", value: "Sends a random meme from reddit." }
         )
         .setThumbnail(guild.iconURL());
       message.channel.send(fun);
@@ -103,7 +103,7 @@ module.exports = {
         .addFields(
           { name: "Set-Prefix", value: "Set bot prefix." },
           { name: "Set-Channel", value: "Set channel for something." },
-          { name: "Set-Logging", value: "Set channel for loggs." },
+          { name: "Set-Logging", value: "Set channel for logs." },
           { name: "Clear-Logging", value: "Stop logs" },
           {
             name: "Set-Welcome-Embed",
