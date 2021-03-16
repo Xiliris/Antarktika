@@ -1,7 +1,6 @@
 const { MessageEmbed } = require("discord.js");
 module.exports = {
   commands: ["help"],
-  requiredChannel: "commands",
   callback: async (message, arguments, Discord, text, client) => {
     const { guild } = message;
     if (arguments[0] === "economy") {
