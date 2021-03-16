@@ -53,13 +53,19 @@ module.exports = {
       guildId,
       userId,
     });
-    console.log(results.warnings.length);
-    if (results.warnings.length > 9) {
-      const embed = new Discord.MessageEmbed()
-        .setAuthor(message.author.tag, message.author.displayAvatarURL(String))
-        .setDescription("❌ | Has too much warnings");
-      message.channel.send(embed);
-      return;
+    if (results) {
+      if (results.warnings) {
+        if (results.warnings.length > 9) {
+          const embed = new Discord.MessageEmbed()
+            .setAuthor(
+              message.author.tag,
+              message.author.displayAvatarURL(String)
+            )
+            .setDescription("❌ | Has too much warnings");
+          message.channel.send(embed);
+          return;
+        }
+      }
     }
     const warnEmbed = new Discord.MessageEmbed()
       .setAuthor(
@@ -84,9 +90,11 @@ module.exports = {
     const result = await loggingSchema.findOne({
       guildId,
     });
-    if (result.warn) {
-      let logChannel = message.guild.channels.cache.get(result.warn);
-      logChannel.send(logEmbed);
+    if (result) {
+      if (result.warn) {
+        let logChannel = message.guild.channels.cache.get(result.warn);
+        logChannel.send(logEmbed);
+      }
     }
     await warnSchema.findOneAndUpdate(
       {
