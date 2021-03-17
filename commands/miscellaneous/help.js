@@ -56,7 +56,8 @@ module.exports = {
           { name: "Dice", value: "Roll a dice." },
           { name: "Invite", value: "Get bots invite link." },
           { name: "Last-Message", value: "Get users last message." },
-          { name: "Snipe", value: "Get last deleted message." }
+          { name: "Snipe", value: "Get last deleted message." },
+          { name: "MemberCount", value: "Get latest information on member stats." }
         )
         .setThumbnail(guild.iconURL());
       message.channel.send(miscellaneous);
