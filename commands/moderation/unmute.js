@@ -61,9 +61,11 @@ module.exports = {
     const result = await loggingSchema.findOne({
       guildId,
     });
-    if (result.unmute) {
-      let logChannel = message.guild.channels.cache.get(result.unmute);
-      logChannel.send(logEmbed);
+    if (result) {
+      if (result.unmute) {
+        let logChannel = message.guild.channels.cache.get(result.unmute);
+        logChannel.send(logEmbed);
+      }
     }
   },
 };
