@@ -14,6 +14,7 @@ const checkMute = require("./server/check-mute");
 const leveling = require("./server/leveling");
 const messageCount = require("./server/messageCount");
 const afkCheck = require("./server/afk-check");
+const rewardLevel = require("./server/level-up-rewards");
 
 const antiInvite = require("./control/anti-advertising");
 const antiCyrillic = require("./control/anti-cyrillic");
@@ -79,6 +80,7 @@ client.on("ready", async () => {
   welcomeRole(client);
   leaveMessage(client);
   reactionRole(client);
+  rewardLevel(client);
 
   //Games
   counting(client, Discord);
