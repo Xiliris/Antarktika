@@ -109,9 +109,11 @@ module.exports = {
       const result = await loggingSchema.findOne({
         guildId,
       });
-      if (result.mute) {
-        let logChannel = message.guild.channels.cache.get(result.mute);
-        logChannel.send(logEmbed);
+      if (result) {
+        if (result.mute) {
+          let logChannel = message.guild.channels.cache.get(result.mute);
+          logChannel.send(logEmbed);
+        }
       }
     } else {
       const time = args[1];
@@ -151,7 +153,7 @@ module.exports = {
         )
         .setColor("#ff0000")
         .addFields(
-          { name: `Reason:`, value: `${muteReason}` },
+          { name: `Reason:`, value: `${reasonBan}` },
           { name: `Time`, value: `${time} seconds` },
           { name: `ID`, value: `${memberTarget.user.id}` }
         )
@@ -160,11 +162,12 @@ module.exports = {
       const result = await loggingSchema.findOne({
         guildId,
       });
-      if (result.mute) {
-        let logChannel = message.guild.channels.cache.get(result.mute);
-        logChannel.send(logEmbed);
+      if (result) {
+        if (result.mute) {
+          let logChannel = message.guild.channels.cache.get(result.mute);
+          logChannel.send(logEmbed);
+        }
       }
-
       setTimeout(async () => {
         memberTarget.roles.remove(muteRole.id);
 
