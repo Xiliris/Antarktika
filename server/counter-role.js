@@ -21,8 +21,7 @@ module.exports = (client) => {
         channelArray.length = channelArray.length - 1;
         const name = `${channelArray} ${roleSize}`;
         const finalName = name.toString().replace(/,/g, " ");
-        channel.setName(finalName);
-        console.log(finalName);
+        channel.setName(`${finalName}`);
       }
     }
   }, 3000);
