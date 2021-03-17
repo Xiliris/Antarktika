@@ -54,7 +54,6 @@ module.exports = (client, Discord) => {
       guildId,
       userId,
     });
-
     const { xp, level } = result;
 
     const getNeededXP = level * level * 150;
