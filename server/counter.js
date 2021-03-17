@@ -20,7 +20,8 @@ module.exports = (client) => {
         channelArray.length = channelArray.length - 1;
         const name = `${channelArray} ${count}`;
         const finalName = name.toString().replace(/,/g, " ");
-        channel.setName(finalName);
+        channel.setName(`${finalName}`);
+        console.log(finalName);
       }
       //BOTS
       if (result.botsChannel) {
@@ -33,7 +34,8 @@ module.exports = (client) => {
         channelArray.length = channelArray.length - 1;
         const name = `${channelArray} ${count}`;
         const finalName = name.toString().replace(/,/g, " ");
-        channel.setName(finalName);
+        channel.setName(`${finalName}`);
+        console.log(finalName);
       }
     }
   }, 1000 * 60 * 5);
