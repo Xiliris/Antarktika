@@ -55,17 +55,6 @@ module.exports = (client, Discord) => {
       userId,
     });
 
-    const resultReward = await levelUpRewardSchema.findOne({
-      guildId,
-    });
-
-    for (reward of resultReward.reward) {
-      const { role, level } = reward;
-      if (result.level >= level) {
-        const roleA = message.guild.roles.cache.get(role);
-        await member.roles.add(roleA);
-      }
-    }
     const { xp, level } = result;
 
     const getNeededXP = level * level * 150;
