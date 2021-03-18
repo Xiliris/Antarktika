@@ -140,7 +140,7 @@ module.exports = {
       await buyRank("dealer", 50000);
     } else if (args === "doctor") {
       if (check < 25000) return message.channel.send(notEmbed);
-      if (a !== "doctor") {
+      if (a !== "thief") {
         const embed = new Discord.MessageEmbed()
           .setAuthor(
             message.author.tag,
