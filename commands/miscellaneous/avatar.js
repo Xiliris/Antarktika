@@ -1,6 +1,5 @@
 module.exports = {
   commands: ["avatar"],
-  requiredChannel: "commands",
   callback: async (message, arguments, Discord, text, client) => {
     const { guild, channel } = message;
 
