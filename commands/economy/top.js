@@ -14,7 +14,6 @@ module.exports = {
         guildId,
       })
       .sort({
-        cash: -1,
         bank: -1,
       })
       .limit(10);
