@@ -125,8 +125,8 @@ module.exports = {
             name: "Reaction-Role",
             value: "Set a reaction role for reaction message.",
           },
-          { name: "Add-Rewards", value: "Adds reward for leveling" },
-          { name: "Remove-Rewards", value: "Removes reward for leveling" },
+          { name: "Add-Reward", value: "Adds reward for leveling" },
+          { name: "Remove-Reward", value: "Removes reward for leveling" },
           { name: "Add-Welcome-Role", value: "Adds welcome role." },
           { name: "Remove-Welcome-Role", value: "Removes welcome role." },
           { name: "List-Welcome-Roles", value: "Lists all welcome roles." }
