@@ -243,23 +243,13 @@ module.exports = {
       color = "red";
     }
 
-    await rouletteSchema.findOneAndUpdate(
-      {
-        guildId,
-        userId,
-      },
-      {
-        guildId,
-        userId,
-        $inc: {
-          bet,
-        },
-        card,
-      },
-      {
-        upsert: true,
-      }
-    );
+    new rouletteSchema({
+      guildId,
+      userId,
+      bet,
+      card,
+    }).save();
+
     if (!timer) {
       await timerSchema.findOneAndUpdate(
         {
@@ -472,9 +462,7 @@ module.exports = {
             guildId,
             game: "Roulette",
           });
-          await rouletteSchema.findOneAndDelete({
-            guildId,
-          });
+          await rouletteSchema.deleteMany({ guildId });
         }, 1000 * 3);
       }
     }, 1000);
