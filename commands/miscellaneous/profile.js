@@ -53,7 +53,7 @@ module.exports = {
       economy = `Net Worth : $0`;
     }
     if (result.rank) {
-      rank = `Rank : ${result.rank}`;
+      rank = `Rank : ${result.rank.toUpperCase()}`;
     } else {
       rank = `Rank : None`;
     }
