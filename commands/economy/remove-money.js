@@ -40,9 +40,28 @@ module.exports = {
       .setAuthor(`${target.tag} `, target.displayAvatarURL(String))
       .setColor("#ff0000")
       .setTitle(`You sucessfully removed $${args[1].toLocaleString()} in cash!`)
-      .setFooter("Bot Developer Xiliris")
       .setTimestamp();
 
     message.channel.send(balanceEmbed);
+
+    const balanceCheck = await profileSchema.findOne({
+      guildId: message.guild.id,
+      userId: message.author.id,
+    });
+    if (!balanceCheck) return;
+    await profileSchema.findOneAndUpdate(
+      {
+        guildId: message.guild.id,
+        userId: message.author.id,
+      },
+      {
+        guildId: message.guild.id,
+        userId: message.author.id,
+        worth: balanceCheck.bank + balanceCheck.cash,
+      },
+      {
+        upsert: true,
+      }
+    );
   },
 };

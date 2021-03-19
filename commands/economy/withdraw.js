@@ -44,10 +44,28 @@ module.exports = {
         .setColor("#00c9ff")
         .setDescription(
           `You withdraw **$${add.toLocaleString()}** from bank account!`
-        )
-        .setFooter("Bot Developer Xiliris");
+        );
 
       message.channel.send(depositeEmbed);
+      const balanceCheck = await profileSchema.findOne({
+        guildId: message.guild.id,
+        userId: message.author.id,
+      });
+      if (!balanceCheck) return;
+      await profileSchema.findOneAndUpdate(
+        {
+          guildId: message.guild.id,
+          userId: message.author.id,
+        },
+        {
+          guildId: message.guild.id,
+          userId: message.author.id,
+          worth: balanceCheck.bank + balanceCheck.cash,
+        },
+        {
+          upsert: true,
+        }
+      );
     } else {
       const result1 = await profileSchema.findOne({
         guildId,
@@ -92,6 +110,25 @@ module.exports = {
           `You withdraw **$${add1.toLocaleString()}** from bank account!`
         );
       message.channel.send(depositEmbed);
+      const balanceCheck = await profileSchema.findOne({
+        guildId: message.guild.id,
+        userId: message.author.id,
+      });
+      if (!balanceCheck) return;
+      await profileSchema.findOneAndUpdate(
+        {
+          guildId: message.guild.id,
+          userId: message.author.id,
+        },
+        {
+          guildId: message.guild.id,
+          userId: message.author.id,
+          worth: balanceCheck.bank + balanceCheck.cash,
+        },
+        {
+          upsert: true,
+        }
+      );
     }
   },
 };

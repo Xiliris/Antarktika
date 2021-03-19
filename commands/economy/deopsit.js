@@ -41,10 +41,31 @@ module.exports = {
           message.author.displayAvatarURL(String)
         )
         .setColor("#00c9ff")
-        .setDescription(`You transferred **$${add.toLocaleString()}** to bank!`)
-        .setFooter("Bot Developer Xiliris");
+        .setDescription(
+          `You transferred **$${add.toLocaleString()}** to bank!`
+        );
 
       message.channel.send(depositeEmbed);
+
+      const balanceCheck = await profileSchema.findOne({
+        guildId: message.guild.id,
+        userId: message.author.id,
+      });
+      if (!balanceCheck) return;
+      await profileSchema.findOneAndUpdate(
+        {
+          guildId: message.guild.id,
+          userId: message.author.id,
+        },
+        {
+          guildId: message.guild.id,
+          userId: message.author.id,
+          worth: balanceCheck.bank + balanceCheck.cash,
+        },
+        {
+          upsert: true,
+        }
+      );
     } else {
       const result1 = await profileSchema.findOne({
         guildId,
@@ -58,8 +79,7 @@ module.exports = {
             message.author.displayAvatarURL(String)
           )
           .setColor("#00c9ff")
-          .setDescription(`❌ | You don't have enough money!`)
-          .setFooter("Bot Developer Xiliris");
+          .setDescription(`❌ | You don't have enough money!`);
 
         message.channel.send(depositEmbed);
         return;
@@ -91,10 +111,29 @@ module.exports = {
         .setColor("#00c9ff")
         .setDescription(
           `You transferred **$${add1.toLocaleString()}** to bank!`
-        )
-        .setFooter("Bot Developer Xiliris");
+        );
 
       message.channel.send(depositEmbed);
+
+      const balanceCheck = await profileSchema.findOne({
+        guildId: message.guild.id,
+        userId: message.author.id,
+      });
+      if (!balanceCheck) return;
+      await profileSchema.findOneAndUpdate(
+        {
+          guildId: message.guild.id,
+          userId: message.author.id,
+        },
+        {
+          guildId: message.guild.id,
+          userId: message.author.id,
+          worth: balanceCheck.bank + balanceCheck.cash,
+        },
+        {
+          upsert: true,
+        }
+      );
     }
   },
 };

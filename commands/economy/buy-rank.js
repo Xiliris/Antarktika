@@ -45,6 +45,26 @@ module.exports = {
         .setAuthor(message.author.tag, message.author.displayAvatarURL(String))
         .setDescription(`You sucessfully bought **${rank}** for $**${cost}**`);
       message.channel.send(embed);
+
+      const balanceCheck = await profileSchema.findOne({
+        guildId: message.guild.id,
+        userId: message.author.id,
+      });
+      if (!balanceCheck) return;
+      await profileSchema.findOneAndUpdate(
+        {
+          guildId: message.guild.id,
+          userId: message.author.id,
+        },
+        {
+          guildId: message.guild.id,
+          userId: message.author.id,
+          worth: balanceCheck.bank + balanceCheck.cash,
+        },
+        {
+          upsert: true,
+        }
+      );
     }
 
     if (args === "tycoon") {

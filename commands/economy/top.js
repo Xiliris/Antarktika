@@ -14,7 +14,7 @@ module.exports = {
         guildId,
       })
       .sort({
-        bank: -1,
+        worth: -1,
       })
       .limit(10);
 
@@ -31,8 +31,7 @@ module.exports = {
       .setTitle("BALANCE LEADERBOARD")
       .setColor("#00ffbe")
       .setDescription(top)
-      .setTimestamp();
-
+      .setFooter("Updates every 3 minutes.");
     message.channel.send(topEmbed);
 
     return top;

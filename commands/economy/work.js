@@ -39,9 +39,28 @@ module.exports = {
         message.author.displayAvatarURL(String)
       )
       .setColor("#00ffbe")
-      .setDescription(randomReply)
-      .setFooter("Bot Developer Xiliris");
+      .setDescription(randomReply);
 
     message.channel.send(workEmbed);
+
+    const balanceCheck = await profileSchema.findOne({
+      guildId: message.guild.id,
+      userId: message.author.id,
+    });
+    if (!balanceCheck) return;
+    await profileSchema.findOneAndUpdate(
+      {
+        guildId: message.guild.id,
+        userId: message.author.id,
+      },
+      {
+        guildId: message.guild.id,
+        userId: message.author.id,
+        worth: balanceCheck.bank + balanceCheck.cash,
+      },
+      {
+        upsert: true,
+      }
+    );
   },
 };

@@ -51,9 +51,28 @@ module.exports = {
       .setAuthor(`${target.tag} `, target.displayAvatarURL(String))
       .setColor("#00c9ff")
       .setTitle(`You sucessfully added $${args[1].toLocaleString()} in cash!`)
-      .setFooter("Bot Developer Xiliris")
       .setTimestamp();
 
     message.channel.send(balanceEmbed);
+
+    const balanceCheck = await profileSchema.findOne({
+      guildId: message.guild.id,
+      userId,
+    });
+    if (!balanceCheck) return;
+    await profileSchema.findOneAndUpdate(
+      {
+        guildId: message.guild.id,
+        userId,
+      },
+      {
+        guildId: message.guild.id,
+        userId,
+        worth: balanceCheck.bank + balanceCheck.cash,
+      },
+      {
+        upsert: true,
+      }
+    );
   },
 };

@@ -102,6 +102,25 @@ module.exports = {
 
     await message.channel.send(balanceEmbed);
 
+    const balanceCheck = await profileSchema.findOne({
+      guildId: message.guild.id,
+      userId: message.author.id,
+    });
+    if (!balanceCheck) return;
+    await profileSchema.findOneAndUpdate(
+      {
+        guildId: message.guild.id,
+        userId: message.author.id,
+      },
+      {
+        guildId: message.guild.id,
+        userId: message.author.id,
+        worth: balanceCheck.bank + balanceCheck.cash,
+      },
+      {
+        upsert: true,
+      }
+    );
     return;
   },
 };

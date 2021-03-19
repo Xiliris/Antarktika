@@ -45,8 +45,7 @@ module.exports = {
           message.author.displayAvatarURL(String)
         )
         .setColor("#00ffbe")
-        .setDescription(posReply)
-        .setFooter("Bot Developer Xiliris");
+        .setDescription(posReply);
 
       message.channel.send(positiveEmbed);
     } else if (cash < 0) {
@@ -56,10 +55,28 @@ module.exports = {
           message.author.displayAvatarURL(String)
         )
         .setColor("#ff0000")
-        .setDescription(negReply)
-        .setFooter("Bot Developer Xiliris");
+        .setDescription(negReply);
 
       message.channel.send(negativeEmbed);
     }
+    const balanceCheck = await profileSchema.findOne({
+      guildId: message.guild.id,
+      userId: message.author.id,
+    });
+    if (!balanceCheck) return;
+    await profileSchema.findOneAndUpdate(
+      {
+        guildId: message.guild.id,
+        userId: message.author.id,
+      },
+      {
+        guildId: message.guild.id,
+        userId: message.author.id,
+        worth: balanceCheck.bank + balanceCheck.cash,
+      },
+      {
+        upsert: true,
+      }
+    );
   },
 };
