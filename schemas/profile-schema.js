@@ -15,6 +15,7 @@ const profileSchema = mongoose.Schema({
   userId: reqString,
   cash: reqNumber,
   bank: reqNumber,
+  worth: reqNumber,
   rank: reqString,
   xp: reqNumber,
   level: {
